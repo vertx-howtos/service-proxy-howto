@@ -1,0 +1,144 @@
+= Create a Vert.x Event Bus Service with Service Proxy
+:page-permalink: /
+:page-github: vertx-howtos/service-proxy-howto
+
+This document will show you how to bootstrap an Event Bus service using Vert.x Service Proxy module. As you will see, this approach is particularly useful when you want to design and consume a service on the event bus using plain Java interfaces.
+
+== What you will build
+
+You will build a Vert.x application that exposes and uses `BarmanService`, an Event Bus Service that generates beers and manages customer bills.
+We are going to deploy two verticles: the `BarmanVerticle` that exposes the service and the `DrunkVerticle` that consumes the service
+
+== What you need
+
+* A text editor or IDE
+* Java 8 higher
+* Maven
+
+== Create a project
+
+Here is the content of the `pom.xml` file you should be using:
+
+[source,xml]
+.Maven `pom.xml`
+----
+include::pom.xml[]
+----
+
+You must import both `vertx-codegen` with `processor` classifier and `vertx-service-proxy`. We are going to use `vertx-web-client` to load the beer names.
+
+== Design the `BarmanService`
+
+First, we must define our service interface. Behind the hoods, a code generator analyze it and generates the event bus message handler and the proxy class.
+
+This is the `BarmanService` interface:
+[source,java,indent=0]
+----
+include::src/main/java/io/vertx/howtos/ebservice/beers/BarmanService.java
+----
+<1> Add `@VertxGen` and `@ProxyGen` to trigger code generation
+<2> Define the method that generates a new beer and adds it to the bill of the customer specified. When the beer is ready, It calls the `handler` with the new beer
+<3> Define the method that retrieves the bill.
+<4> Define the method that settles the bill. This is a fire and forget method
+<5> Specify the method that creates a new proxy. `BarmanServiceVertxEBProxy` is the class name of the proxy that the code generator will create for us
+
+There are a couple of rules you must follow while defining the service interface. Look at http://vertx.io/docs/vertx-service-proxy/java/#_restrictions_for_service_interface[Restrictions for service interface] for more info.
+In our interface we are using a couple of primitives and `Beer`, a POJO annotated as `@DataObject`.
+If you want to use `@DataObject`s inside your interface, they must define both a constructor with only a `JsonObject` parameter and a `toJson()` method that returns a `JsonObject`
+
+To trigger the code generation, you must also add in the same package of the interface a `package-info.java` with `@ModuleGen` annotation:
+[source,java,indent=0]
+----
+include::src/main/java/io/vertx/howtos/ebservice/beers/package-info.java
+----
+
+== Implement the `BarmanService`
+
+Now you can implement the `BarmanService`.
+
+For `giveMeARandomBeer()`:
+[source,java,indent=0]
+----
+include::src/main/java/io/vertx/howtos/ebservice/beers/impl/BarmanServiceImpl.java[tags=giveMeARandomBeer]
+----
+<1> Send a request to the https://www.craftbeernamegenerator.com[Craft Beer Name Generator Service]
+<2> Fail the async method if the request to external service failed
+<3> Create a new `Beer`
+<4> Add the beer to the customer bill
+<5> Complete the async method with the generated beer
+
+For `getMyBill()`:
+[source,java,indent=0]
+----
+include::src/main/java/io/vertx/howtos/ebservice/beers/impl/BarmanServiceImpl.java[tags=getMyBill]
+----
+
+For `settleMyBill()`:
+[source,java,indent=0]
+----
+include::src/main/java/io/vertx/howtos/ebservice/beers/impl/BarmanServiceImpl.java[tags=payMyBill]
+----
+
+== Expose the service
+
+Now we can expose the service inside the `BarmanVerticle` with the `ServiceBinder` class:
+[source,java,indent=0]
+----
+include::src/main/java/io/vertx/howtos/ebservice/BarmanVerticle.java
+----
+<1> Instantiate the `BarmanServiceImpl`
+<2> Instantiate the `ServiceBinder`
+<3> Configure the service address
+<4> Register the service on the event bus
+
+== Use the service
+
+Now we can use the service with the generated proxy. For demo purposes I'm going to use it inside another verticle called `DrunkVerticle`:
+[source,java,indent=0]
+----
+include::src/main/java/io/vertx/howtos/ebservice/DrunkVerticle.java
+----
+<1> Instantiate the proxy
+<2> Let's try the first beer 🍺
+<3> Something went wrong during beer retrieval, fail the verticle start
+<4> Drinking the first one 🍻
+<5> Give me another one 🍺
+<6> Drinking the second one 🍻
+<7> Time to go home. Give me the bill
+<8> Pay the bill
+
+== Running the application
+
+To run the application deploy the `BarmanVerticle` and subsequently the `DrunkVerticle`
+[source,java,indent=0]
+----
+include::src/main/java/io/vertx/howtos/ebservice/BeersApplication.java
+----
+
+You can run the application from:
+
+. your IDE, by running the `main` method from the `BeersApplication` class, or
+. with Maven: `mvn compile exec:java`
+
+You should see something like this:
+----
+The barman is ready to serve you
+Generated a new Beer! Sourpuss (American Malt Liquor)
+My first beer is a Sourpuss (American Malt Liquor) and it costs 5
+Generated a new Beer! Amateur Mountain IPA (American IPA)
+My second beer is a Amateur Mountain IPA (American IPA) and it costs 2
+My bill with the bar is 7
+Removed debt of homer
+----
+
+== Summary
+
+This how-to explained to you:
+
+. How to design and implement an Event Bus Service using Vert.x Service Proxy
+. How to expose the service on the event bus
+. How to use the service
+
+== See also
+
+* http://vertx.io/docs/vertx-service-proxy/java/[Vert.x Service Proxy Documentation]
