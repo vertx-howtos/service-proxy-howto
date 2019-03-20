@@ -19,7 +19,7 @@ We are going to deploy two verticles: the `BarmanVerticle` that exposes the serv
 
 Here is the content of the `pom.xml` file you should be using:
 
-[source,xml]
+[source,xml,role="collapsed"]
 .Maven `pom.xml`
 ----
 include::pom.xml[]
@@ -32,7 +32,7 @@ You must import both `vertx-codegen` with `processor` classifier and `vertx-serv
 First, we must define our service interface. Behind the hoods, a code generator analyze it and generates the event bus message handler and the proxy class.
 
 This is the `BarmanService` interface:
-[source,java,indent=0]
+[source,java,indent=0,role="collapsed"]
 ----
 include::src/main/java/io/vertx/howtos/ebservice/beers/BarmanService.java[]
 ----
@@ -47,7 +47,7 @@ In our interface we are using a couple of primitives and `Beer`, a POJO annotate
 If you want to use `@DataObject`s inside your interface, they must define both a constructor with only a `JsonObject` parameter and a `toJson()` method that returns a `JsonObject`
 
 To trigger the code generation, you must also add in the same package of the interface a `package-info.java` with `@ModuleGen` annotation:
-[source,java,indent=0]
+[source,java,indent=0,role="collapsed"]
 ----
 include::src/main/java/io/vertx/howtos/ebservice/beers/package-info.java[]
 ----
@@ -57,7 +57,7 @@ include::src/main/java/io/vertx/howtos/ebservice/beers/package-info.java[]
 Now you can implement the `BarmanService`.
 
 For `giveMeARandomBeer()`:
-[source,java,indent=0]
+[source,java,indent=0,role="collapsed"]
 ----
 include::src/main/java/io/vertx/howtos/ebservice/beers/impl/BarmanServiceImpl.java[tags=giveMeARandomBeer]
 ----
@@ -68,13 +68,13 @@ include::src/main/java/io/vertx/howtos/ebservice/beers/impl/BarmanServiceImpl.ja
 <5> Complete the async method with the generated beer
 
 For `getMyBill()`:
-[source,java,indent=0]
+[source,java,indent=0,role="collapsed"]
 ----
 include::src/main/java/io/vertx/howtos/ebservice/beers/impl/BarmanServiceImpl.java[tags=getMyBill]
 ----
 
 For `settleMyBill()`:
-[source,java,indent=0]
+[source,java,indent=0,role="collapsed"]
 ----
 include::src/main/java/io/vertx/howtos/ebservice/beers/impl/BarmanServiceImpl.java[tags=payMyBill]
 ----
@@ -82,7 +82,7 @@ include::src/main/java/io/vertx/howtos/ebservice/beers/impl/BarmanServiceImpl.ja
 == Expose the service
 
 Now we can expose the service inside the `BarmanVerticle` with the `ServiceBinder` class:
-[source,java,indent=0]
+[source,java,indent=0,role="collapsed"]
 ----
 include::src/main/java/io/vertx/howtos/ebservice/BarmanVerticle.java[]
 ----
@@ -94,7 +94,7 @@ include::src/main/java/io/vertx/howtos/ebservice/BarmanVerticle.java[]
 == Use the service
 
 Now we can use the service with the generated proxy. For demo purposes I'm going to use it inside another verticle called `DrunkVerticle`:
-[source,java,indent=0]
+[source,java,indent=0,role="collapsed"]
 ----
 include::src/main/java/io/vertx/howtos/ebservice/DrunkVerticle.java[]
 ----
@@ -110,7 +110,7 @@ include::src/main/java/io/vertx/howtos/ebservice/DrunkVerticle.java[]
 == Running the application
 
 To run the application deploy the `BarmanVerticle` and subsequently the `DrunkVerticle`
-[source,java,indent=0]
+[source,java,indent=0,role="collapsed"]
 ----
 include::src/main/java/io/vertx/howtos/ebservice/BeersApplication.java[]
 ----
