@@ -34,7 +34,7 @@ First, we must define our service interface. Behind the hoods, a code generator 
 This is the `BarmanService` interface:
 [source,java,indent=0]
 ----
-include::src/main/java/io/vertx/howtos/ebservice/beers/BarmanService.java
+include::src/main/java/io/vertx/howtos/ebservice/beers/BarmanService.java[]
 ----
 <1> Add `@VertxGen` and `@ProxyGen` to trigger code generation
 <2> Define the method that generates a new beer and adds it to the bill of the customer specified. When the beer is ready, It calls the `handler` with the new beer
@@ -49,7 +49,7 @@ If you want to use `@DataObject`s inside your interface, they must define both a
 To trigger the code generation, you must also add in the same package of the interface a `package-info.java` with `@ModuleGen` annotation:
 [source,java,indent=0]
 ----
-include::src/main/java/io/vertx/howtos/ebservice/beers/package-info.java
+include::src/main/java/io/vertx/howtos/ebservice/beers/package-info.java[]
 ----
 
 == Implement the `BarmanService`
@@ -84,7 +84,7 @@ include::src/main/java/io/vertx/howtos/ebservice/beers/impl/BarmanServiceImpl.ja
 Now we can expose the service inside the `BarmanVerticle` with the `ServiceBinder` class:
 [source,java,indent=0]
 ----
-include::src/main/java/io/vertx/howtos/ebservice/BarmanVerticle.java
+include::src/main/java/io/vertx/howtos/ebservice/BarmanVerticle.java[]
 ----
 <1> Instantiate the `BarmanServiceImpl`
 <2> Instantiate the `ServiceBinder`
@@ -96,7 +96,7 @@ include::src/main/java/io/vertx/howtos/ebservice/BarmanVerticle.java
 Now we can use the service with the generated proxy. For demo purposes I'm going to use it inside another verticle called `DrunkVerticle`:
 [source,java,indent=0]
 ----
-include::src/main/java/io/vertx/howtos/ebservice/DrunkVerticle.java
+include::src/main/java/io/vertx/howtos/ebservice/DrunkVerticle.java[]
 ----
 <1> Instantiate the proxy
 <2> Let's try the first beer 🍺
@@ -112,7 +112,7 @@ include::src/main/java/io/vertx/howtos/ebservice/DrunkVerticle.java
 To run the application deploy the `BarmanVerticle` and subsequently the `DrunkVerticle`
 [source,java,indent=0]
 ----
-include::src/main/java/io/vertx/howtos/ebservice/BeersApplication.java
+include::src/main/java/io/vertx/howtos/ebservice/BeersApplication.java[]
 ----
 
 You can run the application from:
