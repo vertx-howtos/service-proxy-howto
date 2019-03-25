@@ -29,7 +29,7 @@ You must import both `vertx-codegen` with `processor` classifier and `vertx-serv
 
 == Design the `BarmanService`
 
-First, we must define our service interface. Under the hoods, a code generator analyze it and generates the event bus message handler and the proxy class.
+First, we must define our service interface. Under the hood, a code generator analyze it and generates the event bus message handler and the proxy class.
 
 This is the `BarmanService` interface:
 [source,java,indent=0]
