@@ -1,5 +1,7 @@
 theme: vertx-howtos-jekyll-theme
 
+url: https://vertx-howtos.github.io/service-proxy-howto
+
 asciidoctor:
   attributes:
     source-highlighter: rouge
