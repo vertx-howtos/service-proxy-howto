@@ -7,6 +7,7 @@ import io.vertx.howtos.ebservice.beers.impl.BarmanServiceImpl;
 import io.vertx.serviceproxy.ServiceBinder;
 
 public class BarmanVerticle extends AbstractVerticle {
+
   @Override
   public void start() {
     BarmanService service = new BarmanServiceImpl(WebClient.create(vertx)); // <1>

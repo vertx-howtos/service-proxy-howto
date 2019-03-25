@@ -5,6 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.howtos.ebservice.beers.BarmanService;
 
 public class DrunkVerticle extends AbstractVerticle {
+
   @Override
   public void start(Future<Void> startFuture) {
     BarmanService barmanService = BarmanService.createProxy(vertx, "beers.services.myapplication"); // <1>
