@@ -101,7 +101,7 @@ We are going to deploy two verticles: the <code>BarmanVerticle</code> that expos
   <span style="color: #000080">&lt;version&gt;</span>1.0-SNAPSHOT<span style="color: #000080">&lt;/version&gt;</span>
 
   <span style="color: #000080">&lt;properties&gt;</span>
-    <span style="color: #000080">&lt;vertx.version&gt;</span>3.6.3<span style="color: #000080">&lt;/vertx.version&gt;</span>
+    <span style="color: #000080">&lt;vertx.version&gt;</span>3.9.0<span style="color: #000080">&lt;/vertx.version&gt;</span>
     <span style="color: #000080">&lt;maven.compiler.source&gt;</span>1.8<span style="color: #000080">&lt;/maven.compiler.source&gt;</span>
     <span style="color: #000080">&lt;maven.compiler.target&gt;</span>1.8<span style="color: #000080">&lt;/maven.compiler.target&gt;</span>
   <span style="color: #000080">&lt;/properties&gt;</span>
@@ -166,7 +166,7 @@ We are going to deploy two verticles: the <code>BarmanVerticle</code> that expos
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight" style="background-color: #f8f8f8"><code data-lang="java"><span style="color: #000000;font-weight: bold">package</span> <span style="background-color: #f8f8f8">io</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #008080">vertx</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #008080">howtos</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #008080">ebservice</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #008080">beers</span><span style="color: #000000;font-weight: bold">;</span>
+<pre class="rouge highlight" style="background-color: #f8f8f8"><code data-lang="java"><span style="color: #000000;font-weight: bold">package</span> <span style="color: #555555">io.vertx.howtos.ebservice.beers</span><span style="color: #000000;font-weight: bold">;</span>
 
 <span style="color: #000000;font-weight: bold">import</span> <span style="color: #555555">io.vertx.codegen.annotations.ProxyGen</span><span style="color: #000000;font-weight: bold">;</span>
 <span style="color: #000000;font-weight: bold">import</span> <span style="color: #555555">io.vertx.codegen.annotations.VertxGen</span><span style="color: #000000;font-weight: bold">;</span>
@@ -221,7 +221,7 @@ If you want to use <code>@DataObject`s inside your interface, they must define b
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight" style="background-color: #f8f8f8"><code data-lang="java"><span style="color: #3c5d5d;font-weight: bold">@ModuleGen</span><span style="color: #000000;font-weight: bold">(</span><span style="background-color: #f8f8f8">groupPackage</span> <span style="color: #000000;font-weight: bold">=</span> <span style="color: #d14">"io.vertx.howtos.ebservice"</span><span style="color: #000000;font-weight: bold">,</span> <span style="background-color: #f8f8f8">name</span> <span style="color: #000000;font-weight: bold">=</span> <span style="color: #d14">"beers"</span><span style="color: #000000;font-weight: bold">)</span>
-<span style="color: #000000;font-weight: bold">package</span> <span style="background-color: #f8f8f8">io</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #008080">vertx</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #008080">howtos</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #008080">ebservice</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #008080">beers</span><span style="color: #000000;font-weight: bold">;</span>
+<span style="color: #000000;font-weight: bold">package</span> <span style="color: #555555">io.vertx.howtos.ebservice.beers</span><span style="color: #000000;font-weight: bold">;</span>
 
 <span style="color: #000000;font-weight: bold">import</span> <span style="color: #555555">io.vertx.codegen.annotations.ModuleGen</span><span style="color: #000000;font-weight: bold">;</span></code></pre>
 </div>
@@ -317,7 +317,7 @@ If you want to use <code>@DataObject`s inside your interface, they must define b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight" style="background-color: #f8f8f8"><code data-lang="java"><span style="color: #000000;font-weight: bold">package</span> <span style="background-color: #f8f8f8">io</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #008080">vertx</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #008080">howtos</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #008080">ebservice</span><span style="color: #000000;font-weight: bold">;</span>
+<pre class="rouge highlight" style="background-color: #f8f8f8"><code data-lang="java"><span style="color: #000000;font-weight: bold">package</span> <span style="color: #555555">io.vertx.howtos.ebservice</span><span style="color: #000000;font-weight: bold">;</span>
 
 <span style="color: #000000;font-weight: bold">import</span> <span style="color: #555555">io.vertx.core.AbstractVerticle</span><span style="color: #000000;font-weight: bold">;</span>
 <span style="color: #000000;font-weight: bold">import</span> <span style="color: #555555">io.vertx.ext.web.client.WebClient</span><span style="color: #000000;font-weight: bold">;</span>
@@ -364,7 +364,7 @@ If you want to use <code>@DataObject`s inside your interface, they must define b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight" style="background-color: #f8f8f8"><code data-lang="java"><span style="color: #000000;font-weight: bold">package</span> <span style="background-color: #f8f8f8">io</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #008080">vertx</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #008080">howtos</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #008080">ebservice</span><span style="color: #000000;font-weight: bold">;</span>
+<pre class="rouge highlight" style="background-color: #f8f8f8"><code data-lang="java"><span style="color: #000000;font-weight: bold">package</span> <span style="color: #555555">io.vertx.howtos.ebservice</span><span style="color: #000000;font-weight: bold">;</span>
 
 <span style="color: #000000;font-weight: bold">import</span> <span style="color: #555555">io.vertx.core.AbstractVerticle</span><span style="color: #000000;font-weight: bold">;</span>
 <span style="color: #000000;font-weight: bold">import</span> <span style="color: #555555">io.vertx.core.Future</span><span style="color: #000000;font-weight: bold">;</span>
@@ -442,7 +442,7 @@ If you want to use <code>@DataObject`s inside your interface, they must define b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight" style="background-color: #f8f8f8"><code data-lang="java"><span style="color: #000000;font-weight: bold">package</span> <span style="background-color: #f8f8f8">io</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #008080">vertx</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #008080">howtos</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #008080">ebservice</span><span style="color: #000000;font-weight: bold">;</span>
+<pre class="rouge highlight" style="background-color: #f8f8f8"><code data-lang="java"><span style="color: #000000;font-weight: bold">package</span> <span style="color: #555555">io.vertx.howtos.ebservice</span><span style="color: #000000;font-weight: bold">;</span>
 
 <span style="color: #000000;font-weight: bold">import</span> <span style="color: #555555">io.vertx.core.Vertx</span><span style="color: #000000;font-weight: bold">;</span>
 
@@ -626,7 +626,7 @@ Removed debt of homer</pre>
   <div class="row">
     <div class="col">
       <hr>
-      <p><small>Last published: 2019-12-12 15:08:03 +0000.</small></p>
+      <p><small>Last published: 2020-04-27 09:07:55 +0000.</small></p>
     </div>
   </div>
 </div>
