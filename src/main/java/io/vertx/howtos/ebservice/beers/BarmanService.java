@@ -2,17 +2,16 @@ package io.vertx.howtos.ebservice.beers;
 
 import io.vertx.codegen.annotations.ProxyGen;
 import io.vertx.codegen.annotations.VertxGen;
-import io.vertx.core.AsyncResult;
-import io.vertx.core.Handler;
+import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 
 @VertxGen
 @ProxyGen // <1>
 public interface BarmanService {
 
-  void giveMeARandomBeer(String customerName, Handler<AsyncResult<Beer>> handler); // <2>
+  Future<Beer> giveMeARandomBeer(String customerName); // <2>
 
-  void getMyBill(String customerName, Handler<AsyncResult<Integer>> handler); // <3>
+  Future<Integer> getMyBill(String customerName); // <3>
 
   void payMyBill(String customerName); // <4>
 

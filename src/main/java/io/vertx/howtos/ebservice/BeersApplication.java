@@ -6,12 +6,9 @@ public class BeersApplication {
 
   public static void main(String[] args) {
     Vertx vertx = Vertx.vertx();
-    vertx.deployVerticle(new BarmanVerticle(), ar -> {
-      System.out.println("The barman is ready to serve you");
-      vertx.deployVerticle(new DrunkVerticle(), ar2 -> {
-        vertx.close();
-      });
-    });
+    vertx.deployVerticle(new BarmanVerticle()).await();
+    System.out.println("The barman is ready to serve you");
+    vertx.deployVerticle(new DrunkVerticle()).await();
+    vertx.close().await();
   }
-
 }

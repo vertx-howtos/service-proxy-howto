@@ -1,9 +1,11 @@
 package io.vertx.howtos.ebservice.beers;
 
 import io.vertx.codegen.annotations.DataObject;
+import io.vertx.codegen.json.annotations.JsonGen;
 import io.vertx.core.json.JsonObject;
 
-@DataObject(generateConverter = true)
+@DataObject
+@JsonGen
 public class Beer {
 
   String name;
